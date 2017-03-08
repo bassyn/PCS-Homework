@@ -33,4 +33,3 @@ Uptime: 283 store 10> db.products.remove({})
 WriteResult({ "nRemoved" : 1 })
 Uptime: 337 store 11> db.products.count()
 0
-Uptime: 344 store 12>
