@@ -25,11 +25,21 @@ Uptime: 155 school 4> db.students.find({first_name: "Donald", grade: 5})
 { "_id" : ObjectId("58bf11fb78c15526a23c7c53"), "first_name" : "Donald", "last_name" : "Trump", "address" : "123 4th Street", "grade" : 5 }
 Uptime: 181 school 5> use store
 switched to db store
-Uptime: 188 store 6> db.products.insert({name: "cups", price: "$1.25"}, {name: "tissues", price: "$2.00"})
-WriteResult({ "nInserted" : 1 })
-Uptime: 253 store 7> db.products.find()
-{ "_id" : ObjectId("58bf127078c15526a23c7c58"), "name" : "cups", "price" : "$1.25" }
-Uptime: 283 store 10> db.products.remove({})
-WriteResult({ "nRemoved" : 1 })
-Uptime: 337 store 11> db.products.count()
-0
+Uptime: 17 store 2> db.products.insert([{name: "cups", price: "$1.25"}, {name: "tissues", price: "$2.00"}])
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 2,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+Uptime: 64 store 3> db.products.find()
+{ "_id" : ObjectId("58cfef7c5f1978345019fb9f"), "name" : "cups", "price" : "$1.25" }
+{ "_id" : ObjectId("58cfef7c5f1978345019fba0"), "name" : "tissues", "price" : "$2.00" }
+Uptime: 77 store 4> db.products.remove({})
+WriteResult({ "nRemoved" : 2 })
+Uptime: 92 store 5> db.products.count()
+0
