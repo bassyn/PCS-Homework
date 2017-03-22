@@ -1,13 +1,6 @@
-MongoDB shell version v3.4.2
-connecting to: mongodb://127.0.0.1:27017
-MongoDB server version: 3.4.2
-Server has startup warnings:
-2017-03-07T15:00:53.820-0500 I CONTROL  [initandlisten]
-2017-03-07T15:00:53.820-0500 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
-2017-03-07T15:00:53.821-0500 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
-2017-03-07T15:00:53.822-0500 I CONTROL  [initandlisten]
 Uptime: 124 test 1> use school
 switched to db school
+
 Uptime: 127 school 2> db.students.insert([{first_name: "Donald", last_name: "Trump", address: "123 4th Street", grade: 5}, {first_name: "Hillary", last_name: "Clinton", address: "111 1st Street", grade: 9}, {first_name: "Barack", last_name: "Obama", address: "222 2nd Street", grade: 10},  {first_name: "Chris", last_name: "Christie", address: "333 3rd Street", grade: 11}, {first_name: "Kim", last_name: "Guadagno", address: "444 4th Street", grade: 12} ])
 BulkWriteResult({
         "writeErrors" : [ ],
@@ -19,17 +12,34 @@ BulkWriteResult({
         "nRemoved" : 0,
         "upserted" : [ ]
 })
+
 Uptime: 136 school 3> db.students.find({first_name: "Donald"})
 { "_id" : ObjectId("58bf11fb78c15526a23c7c53"), "first_name" : "Donald", "last_name" : "Trump", "address" : "123 4th Street", "grade" : 5 }
+
 Uptime: 155 school 4> db.students.find({first_name: "Donald", grade: 5})
 { "_id" : ObjectId("58bf11fb78c15526a23c7c53"), "first_name" : "Donald", "last_name" : "Trump", "address" : "123 4th Street", "grade" : 5 }
+
 Uptime: 181 school 5> use store
 switched to db store
-Uptime: 188 store 6> db.products.insert({name: "cups", price: "$1.25"}, {name: "tissues", price: "$2.00"})
-WriteResult({ "nInserted" : 1 })
-Uptime: 253 store 7> db.products.find()
-{ "_id" : ObjectId("58bf127078c15526a23c7c58"), "name" : "cups", "price" : "$1.25" }
-Uptime: 283 store 10> db.products.remove({})
-WriteResult({ "nRemoved" : 1 })
-Uptime: 337 store 11> db.products.count()
+
+Uptime: 344 store 12> db.products.insert([{name: "cups", price: "$1.25"}, {name: "tissues", price: "$2.00"}])
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 2,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+
+Uptime: 19064 store 13> db.products.find()
+{ "_id" : ObjectId("58bf5beb78c15526a23c7c59"), "name" : "cups", "price" : "$1.25" }
+{ "_id" : ObjectId("58bf5beb78c15526a23c7c5a"), "name" : "tissues", "price" : "$2.00" }
+
+Uptime: 19085 store 15> db.products.remove({})
+WriteResult({ "nRemoved" : 2 })
+
+Uptime: 19097 store 16> db.products.count()
 0
