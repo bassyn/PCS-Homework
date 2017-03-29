@@ -1,0 +1,52 @@
+{{#posts}}
+<div id="{{_id}}">
+    <h2>{{title}}</h2>
+    <h3>by {{author}} at {{date}}</h3>
+    <div>{{content}}</div>
+
+    {{#comments}}
+        <div class="comment">
+            <div>{{content}}</div>
+            <div class="attribution">Posted by {{author}} at {{date}}</div>
+        </div>
+    {{/comments}}
+    <a class="commentLink">Add Comment</a>
+    <form class="commentForm" method="post">
+        <div>
+            Content:
+            <textarea name="content" id="content" placeholder="Enter comment content"></textarea>
+        </div>
+        <button id="submit">Submit</button>
+    </form>
+</div>
+{{/posts}}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+
+    $('.commentLink').click(() =>{
+        $('.commentForm').show();
+    });
+
+    $('#submit').click((e) =>{
+        e.preventDefault();
+        $('.commentForm').hide();
+        let id = $('div').attr('id'),
+            content = $('textarea#content').val();
+
+        $.ajax({ 
+            url: '/newComment',
+            type: 'POST',
+            data: { id: id, content: content }, 
+            success: (data) => {
+                console.log('Success');
+            }, 
+            error: function(jqXHR, textStatus, err){
+                console.log('error: ' + err);
+            }
+            })
+
+            $('textarea#content').val('');
+        }); 
+
+</script>
