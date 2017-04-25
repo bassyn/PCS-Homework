@@ -23,30 +23,32 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
+    (function() {
+        'use strict';
 
-    $('.commentLink').click(() =>{
-        $('.commentForm').show();
-    });
+        $('.commentLink').click(() =>{
+            $('.commentForm').show();
+        });
 
-    $('#submit').click((e) =>{
-        e.preventDefault();
-        $('.commentForm').hide();
-        let id = $('div').attr('id'),
-            content = $('textarea#content').val();
+        $('#submit').click((e) =>{
+            e.preventDefault();
+            $('.commentForm').hide();
+            let id = $('div').attr('id'),
+                content = $('textarea#content').val();
 
-        $.ajax({ 
-            url: '/newComment',
-            type: 'POST',
-            data: { id: id, content: content }, 
-            success: (data) => {
-                console.log('Success');
-            }, 
-            error: function(jqXHR, textStatus, err){
-                console.log('error: ' + err);
-            }
-            })
+            $.ajax({ 
+                url: '/newComment',
+                type: 'POST',
+                data: { id: id, content: content }, 
+                success: (data) => {
+                    console.log('Success');
+                }, 
+                error: function(jqXHR, textStatus, err){
+                    console.log('error: ' + err);
+                }
+                })
 
-            $('textarea#content').val('');
-        }); 
-
+                $('textarea#content').val('');
+            }); 
+    }());
 </script>
